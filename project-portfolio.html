@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Portfolio v2 — Kingsley</title>
+  <meta name="description" content="Personal Portfolio v2 — A cutting-edge portfolio website featuring liquid glass design, interactive particle systems, and fluid animations.">
+  <meta name="keywords" content="Portfolio Design, Liquid Glass, 3D Glassmorphism, Vanilla JS, HTML5, CSS3, Kingsley, Afolabi Joshua">
+  <meta name="author" content="Afolabi Joshua Kingsley">
+  <meta property="og:title" content="Personal Portfolio v2 — Kingsley">
+  <meta property="og:description" content="A cutting-edge portfolio website featuring liquid glass design, interactive particle systems, and fluid animations.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== Animated Background ========== -->
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
+    <div class="bg-orb bg-orb--3"></div>
+    <div class="bg-orb bg-orb--4"></div>
+  </div>
+
+  <!-- ========== Navigation ========== -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-bracket">{</span>
+        <span class="logo-name">Kingsley</span>
+        <span class="logo-bracket">}</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- ========== Breadcrumb ========== -->
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="separator">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+      <a href="index.html#projects">Projects</a>
+      <span class="separator">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+      <span class="current">Personal Portfolio v2</span>
+    </div>
+  </div>
+
+  <!-- ========== Page Header ========== -->
+  <header class="page-header">
+    <div class="container">
+      <span class="page-icon">🌐</span>
+      <span class="page-category">Portfolio</span>
+      <h1>Personal Portfolio <span class="gradient-text">v2</span></h1>
+      <p class="page-lead">
+        A cutting-edge portfolio website featuring liquid glass design, interactive particle systems, and fluid animations — built entirely with vanilla HTML, CSS, and JavaScript.
+      </p>
+      <div class="page-meta">
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Status: Live
+        </div>
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Year: 2025
+        </div>
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Role: Designer &amp; Developer
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== Project Content ========== -->
+  <section class="project-content">
+    <div class="container">
+      <div class="content-grid">
+
+        <!-- ===== Left Column: Documentation ===== -->
+        <div class="doc-sections">
+
+          <!-- Overview -->
+          <div class="doc-section reveal">
+            <h2 id="overview">Overview</h2>
+            <p>
+              When designing a personal portfolio website, the goal is often not just to display past work, but to demonstrate technical ability and creative vision directly through the user experience. The Personal Portfolio v2 was built to accomplish exactly that. Moving away from standard, boring layouts, this website focuses on presenting information through a cutting-edge "liquid glass" aesthetic that balances premium visuals with high performance.
+            </p>
+            <p>
+              The core concept centers around frosted glass containers that respond dynamically to user input. Using 3D perspective transforms, mouse-tracking hover states, and smooth CSS transitions, the site feels alive and physical. The light-mode palette provides a bright, premium feel, with subtle gradient orbs floating in the background, creating the illusion of deep visual layers.
+            </p>
+            <p>
+              A major constraint of the project was performance. Many modern portfolio websites that use heavy animations and 3D effects rely on extensive frameworks and massive libraries, which degrade loading speeds and performance on mobile devices. This project serves as a proof of concept that premium, high-fidelity web experiences can be built using zero dependencies—relying entirely on vanilla HTML, CSS, and JS.
+            </p>
+          </div>
+
+          <!-- Design Philosophy -->
+          <div class="doc-section reveal">
+            <h2 id="design">Design Philosophy</h2>
+            <p>
+              The design system is based on a modern interpretation of glassmorphism combined with a light, optimistic color palette. Frosted glass cards feature a high level of background blur, translucent borders, and subtle internal glow effects. In addition, we introduced a 3D perspective to the container cards. When the user hovers over a card, the card tilts along its horizontal and vertical axes to follow the mouse, creating a physical sense of depth.
+            </p>
+            <p>
+              Prismatic light reflections add another layer of visual interest. Rather than using static gradient overlays, we use radial gradients and dynamic masks that shimmer when the cursor moves across the cards, simulating physical light refraction. Soft background gradient orbs move gently, changing positions and colors slightly to create a liquid-like mesh background that responds as the user scrolls.
+            </p>
+          </div>
+
+          <!-- Key Features -->
+          <div class="doc-section reveal">
+            <h2 id="features">Key Features</h2>
+            <div class="feature-list">
+              <div class="feature-item">
+                <span class="feature-icon">🫧</span>
+                <div class="feature-text">
+                  <h4>Liquid Glass Design</h4>
+                  <p>Frosted glass cards with high background blur, dynamic drop shadows, and delicate borders that blend seamlessly with the moving background.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✨</span>
+                <div class="feature-text">
+                  <h4>Interactive Particles</h4>
+                  <p>A high-performance HTML5 Canvas particle system in the hero section that spawns soft, glowing nodes that drift naturally and move away from the user's cursor.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">🎭</span>
+                <div class="feature-text">
+                  <h4>3D Card Tilt</h4>
+                  <p>Cursor-tracking perspective transforms applied dynamically to glass cards. Cards lean towards the mouse position, creating a real 3D depth effect on desktop.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">📱</span>
+                <div class="feature-text">
+                  <h4>Fully Responsive</h4>
+                  <p>Adapts flawlessly to any viewport. The 3D transforms are gracefully disabled on touch devices to ensure the best possible experience on mobile phones.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">⚡</span>
+                <div class="feature-text">
+                  <h4>Zero Dependencies</h4>
+                  <p>Crafted entirely in raw HTML5, CSS3, and ES6 JavaScript. No frameworks, no external animation libraries, ensuring an incredibly small bundle size and instant load times.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">🎨</span>
+                <div class="feature-text">
+                  <h4>Prismatic Refractions</h4>
+                  <p>Subtle rainbow highlights and liquid shimmers that move across the glass borders on hover, reinforcing the liquid glass aesthetic.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Implementation -->
+          <div class="doc-section reveal">
+            <h2 id="implementation">Technical Implementation</h2>
+            <p>
+              To achieve the frosted glass look, we rely heavily on modern CSS layout properties like <code>backdrop-filter</code> and complex box-shadow overlays. The 3D perspective is established on the parent containers using CSS custom properties that are modified on the fly by JavaScript event handlers. Below is a code snippet demonstrating the CSS setup for the interactive glass cards:
+            </p>
+            <pre><code>.glass-card {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  transition: 
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.glass-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--shadow-glass-hover);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    135deg, 
+    rgba(255,255,255,0.4) 0%, 
+    rgba(255,255,255,0) 50%, 
+    rgba(100,150,255,0.05) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}</code></pre>
+          </div>
+
+          <!-- Performance -->
+          <div class="doc-section reveal">
+            <h2 id="performance">Performance</h2>
+            <p>
+              With multiple complex animations running simultaneously, optimizing for performance was key to maintaining a smooth 60fps refresh rate:
+            </p>
+            <ul>
+              <li><strong>IntersectionObserver API:</strong> Used to run scroll-reveal animations only when elements enter the viewport, reducing off-screen styling computations.</li>
+              <li><strong>Canvas Optimization:</strong> The background particle system uses a lightweight canvas. Animation loops are managed with <code>requestAnimationFrame</code> and automatically pause when the tab goes background or when the hero section scrolls out of view.</li>
+              <li><strong>Passive Event Listeners:</strong> Mouse and scroll listeners utilize the <code>{ passive: true }</code> option to ensure they never block default browser scrolling behavior.</li>
+              <li><strong>CSS Hardware Acceleration:</strong> Smooth transforms rely on <code>translate3d</code> to trigger GPU acceleration, preventing layout reflows.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- ===== Right Column: Sidebar ===== -->
+        <aside class="project-sidebar">
+
+          <!-- Tech Stack -->
+          <div class="sidebar-card glass-card">
+            <div class="liquid-shimmer"></div>
+            <h4>Tech Stack</h4>
+            <div class="tech-list">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
+              <span>Canvas API</span>
+              <span>IntersectionObserver</span>
+              <span>CSS Variables</span>
+              <span>SVG Icons</span>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="sidebar-card glass-card">
+            <div class="liquid-shimmer"></div>
+            <h4>Quick Links</h4>
+            <div class="sidebar-links">
+              <a href="https://joshuaking0037-beep.github.io/my-portfolio/" target="_blank" rel="noopener noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Live Website
+              </a>
+              <a href="https://github.com/joshuaking0037-beep/my-portfolio" target="_blank" rel="noopener noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                View on GitHub
+              </a>
+              <a href="contact.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Get in Touch
+              </a>
+            </div>
+          </div>
+
+          <!-- Table of Contents -->
+          <div class="sidebar-card glass-card">
+            <div class="liquid-shimmer"></div>
+            <h4>Table of Contents</h4>
+            <ul class="sidebar-toc">
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#design">Design Philosophy</a></li>
+              <li><a href="#features">Key Features</a></li>
+              <li><a href="#implementation">Technical Implementation</a></li>
+              <li><a href="#performance">Performance</a></li>
+            </ul>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Footer ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-copy">
+          © 2026 <span class="highlight">Kingsley</span>. Crafted with passion and purpose.
+        </p>
+        <div class="footer-socials">
+          <a href="https://github.com/joshuaking0037-beep" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/afolabi-joshua-794917201" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://x.com/kingsley00_7" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/xins_le" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
