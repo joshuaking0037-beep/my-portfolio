@@ -5,73 +5,282 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ========== Hero Particle Canvas ==========
-  const canvas = document.getElementById('heroCanvas');
+  // ========== 3D Background Canvas ==========
+  const canvas = document.getElementById('bgCanvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
-    let particles = [];
+    let width = window.innerWidth;
+    let height = window.innerHeight;
     let mouseX = 0, mouseY = 0;
+    let targetMouseX = 0, targetMouseY = 0;
 
     function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
     }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    class Particle {
-      constructor() { this.reset(); }
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2.5 + 0.8;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.speedY = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.35 + 0.1;
-        this.hue = Math.random() > 0.5 ? (200 + Math.random() * 40) : (260 + Math.random() * 30);
-        this.pulseSpeed = Math.random() * 0.015 + 0.005;
-        this.pulsePhase = Math.random() * Math.PI * 2;
+    // Track mouse position with smoothing relative to center
+    document.addEventListener('mousemove', e => {
+      targetMouseX = e.clientX - width / 2;
+      targetMouseY = e.clientY - height / 2;
+    });
+
+    // Helper functions for 3D rotation
+    function rotateX(x, y, z, angle) {
+      const cos = Math.cos(angle), sin = Math.sin(angle);
+      return [x, y * cos - z * sin, y * sin + z * cos];
+    }
+    function rotateY(x, y, z, angle) {
+      const cos = Math.cos(angle), sin = Math.sin(angle);
+      return [x * cos + z * sin, y, -x * sin + z * cos];
+    }
+    function rotateZ(x, y, z, angle) {
+      const cos = Math.cos(angle), sin = Math.sin(angle);
+      return [x * cos - y * sin, x * sin + y * cos, z];
+    }
+
+    // Class for 3D floating object
+    class Object3D {
+      constructor() {
+        this.reset(true);
       }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        const dx = mouseX - this.x, dy = mouseY - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          const force = (150 - dist) / 150;
-          this.x -= dx * force * 0.006;
-          this.y -= dy * force * 0.006;
+
+      reset(init = false) {
+        // Random position in space
+        this.x = (Math.random() - 0.5) * width * 1.5;
+        this.y = (Math.random() - 0.5) * height * 1.5;
+        this.z = init ? Math.random() * 1000 : 1000; // start far away
+
+        // Rotation angles and speeds
+        this.rx = Math.random() * Math.PI * 2;
+        this.ry = Math.random() * Math.PI * 2;
+        this.rz = Math.random() * Math.PI * 2;
+        this.rotSpeedX = (Math.random() - 0.5) * 0.012;
+        this.rotSpeedY = (Math.random() - 0.5) * 0.012;
+        this.rotSpeedZ = (Math.random() - 0.5) * 0.012;
+
+        // Speed moving towards screen
+        this.speedZ = -0.3 - Math.random() * 0.5;
+
+        // Color theme
+        const colors = [
+          'rgba(0, 180, 216, ',   // Cyan
+          'rgba(77, 107, 255, ',  // Blue
+          'rgba(139, 92, 246, ',  // Purple
+          'rgba(232, 67, 147, '   // Pink
+        ];
+        this.colorPrefix = colors[Math.floor(Math.random() * colors.length)];
+
+        // Select type
+        const rand = Math.random();
+        if (rand < 0.65) {
+          this.type = 'text';
+          const symbols = ['⚙', '{ }', '</>', '∫', '∑', '∞', 'π', 'λ', '⌬', 'Δ', '⚡', '⏣', 'd/dx'];
+          this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        } else if (rand < 0.85) {
+          this.type = 'wireframe';
+          const shapes = ['cube', 'pyramid', 'benzene'];
+          this.shape = shapes[Math.floor(Math.random() * shapes.length)];
+          this.initGeometry();
+        } else {
+          this.type = 'gear';
+          this.initGearGeometry();
         }
-        this.pulsePhase += this.pulseSpeed;
-        if (this.x < -10) this.x = canvas.width + 10;
-        if (this.x > canvas.width + 10) this.x = -10;
-        if (this.y < -10) this.y = canvas.height + 10;
-        if (this.y > canvas.height + 10) this.y = -10;
-        return this.opacity + Math.sin(this.pulsePhase) * 0.1;
       }
-      draw(op) {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${this.hue}, 60%, 55%, ${Math.max(0, op)})`;
-        ctx.fill();
+
+      initGeometry() {
+        if (this.shape === 'cube') {
+          const s = 30;
+          this.vertices = [
+            [-s, -s, -s], [s, -s, -s], [s, s, -s], [-s, s, -s],
+            [-s, -s, s], [s, -s, s], [s, s, s], [-s, s, s]
+          ];
+          this.edges = [
+            [0,1], [1,2], [2,3], [3,0],
+            [4,5], [5,6], [6,7], [7,4],
+            [0,4], [1,5], [2,6], [3,7]
+          ];
+        } else if (this.shape === 'pyramid') {
+          const s = 35;
+          this.vertices = [
+            [0, -s, 0], [-s, s, -s], [s, s, -s], [s, s, s], [-s, s, s]
+          ];
+          this.edges = [
+            [0,1], [0,2], [0,3], [0,4],
+            [1,2], [2,3], [3,4], [4,1]
+          ];
+        } else if (this.shape === 'benzene') {
+          const r = 30;
+          const h = 12;
+          this.vertices = [];
+          this.edges = [];
+          for (let i = 0; i < 6; i++) {
+            const angle = (i * Math.PI) / 3;
+            const x = r * Math.cos(angle);
+            const y = r * Math.sin(angle);
+            this.vertices.push([x, y, -h]);
+            this.vertices.push([x, y, h]);
+            const idx = i * 2;
+            this.edges.push([idx, idx + 1]);
+            const nextIdx = ((i + 1) % 6) * 2;
+            this.edges.push([idx, nextIdx]);
+            this.edges.push([idx + 1, nextIdx + 1]);
+          }
+        }
+      }
+
+      initGearGeometry() {
+        const rInner = 24;
+        const rOuter = 34;
+        const h = 10;
+        const teeth = 8;
+        const segments = teeth * 2;
+        this.vertices = [];
+        this.edges = [];
+
+        for (let i = 0; i < segments; i++) {
+          const angle = (i * Math.PI * 2) / segments;
+          const r = (i % 2 === 0) ? rOuter : rInner;
+          const x = r * Math.cos(angle);
+          const y = r * Math.sin(angle);
+
+          this.vertices.push([x, y, -h]);
+          this.vertices.push([x, y, h]);
+
+          const idx = i * 2;
+          this.edges.push([idx, idx + 1]);
+
+          const nextIdx = ((i + 1) % segments) * 2;
+          this.edges.push([idx, nextIdx]);
+          this.edges.push([idx + 1, nextIdx + 1]);
+        }
+      }
+
+      update() {
+        this.z += this.speedZ;
+        this.rx += this.rotSpeedX;
+        this.ry += this.rotSpeedY;
+        this.rz += this.rotSpeedZ;
+        if (this.z < 10) {
+          this.reset(false);
+        }
+      }
+
+      draw() {
+        const d = 400;
+        const mx = mouseX * (1 - this.z / 1200);
+        const my = mouseY * (1 - this.z / 1200);
+        
+        let px = this.x - mx;
+        let py = this.y - my;
+        let pz = this.z;
+
+        const scale = d / (pz + d);
+        const screenX = px * scale + width / 2;
+        const screenY = py * scale + height / 2;
+
+        if (screenX < -100 || screenX > width + 100 || screenY < -100 || screenY > height + 100) return;
+
+        let opacity = 1;
+        if (this.z > 800) {
+          opacity = (1000 - this.z) / 200;
+        } else if (this.z < 150) {
+          opacity = (this.z - 10) / 140;
+        }
+        opacity = Math.max(0, Math.min(1, opacity)) * 0.45;
+
+        ctx.fillStyle = this.colorPrefix + opacity + ')';
+        ctx.strokeStyle = this.colorPrefix + (opacity * 0.85) + ')';
+
+        if (this.type === 'text') {
+          ctx.font = `${Math.floor(16 + scale * 14)}px ${this.symbol.length > 2 ? 'var(--font-mono)' : 'var(--font-sans)'}`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          
+          ctx.save();
+          ctx.translate(screenX, screenY);
+          ctx.rotate(this.rz * 0.3);
+          ctx.fillText(this.symbol, 0, 0);
+          ctx.restore();
+        } else {
+          ctx.lineWidth = 0.8 + scale * 0.8;
+          ctx.beginPath();
+
+          const projectedPoints = this.vertices.map(v => {
+            let [rx, ry, rz] = rotateX(v[0], v[1], v[2], this.rx);
+            [rx, ry, rz] = rotateY(rx, ry, rz, this.ry);
+            [rx, ry, rz] = rotateZ(rx, ry, rz, this.rz);
+
+            const tx = rx + this.x - mx;
+            const ty = ry + this.y - my;
+            const tz = rz + this.z;
+
+            const s = d / (tz + d);
+            return [
+              tx * s + width / 2,
+              ty * s + height / 2
+            ];
+          });
+
+          this.edges.forEach(e => {
+            const p1 = projectedPoints[e[0]];
+            const p2 = projectedPoints[e[1]];
+            if (p1 && p2) {
+              ctx.moveTo(p1[0], p1[1]);
+              ctx.lineTo(p2[0], p2[1]);
+            }
+          });
+          ctx.stroke();
+        }
       }
     }
 
-    const count = Math.min(100, Math.floor((canvas.width * canvas.height) / 15000));
-    for (let i = 0; i < count; i++) particles.push(new Particle());
+    const objects = [];
+    const objectCount = 35;
+    for (let i = 0; i < objectCount; i++) {
+      objects.push(new Object3D());
+    }
 
-    function drawConnections() {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
+    // Connect close objects in 3D space to form a dynamic network
+    function draw3DConnections() {
+      ctx.lineWidth = 0.4;
+      for (let i = 0; i < objects.length; i++) {
+        for (let j = i + 1; j < objects.length; j++) {
+          const dx = objects[i].x - objects[j].x;
+          const dy = objects[i].y - objects[j].y;
+          const dz = objects[i].z - objects[j].z;
+          const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+          
+          if (dist < 220) {
+            const pz = (objects[i].z + objects[j].z) / 2;
+            const d = 400;
+            const scale = d / (pz + d);
+            
+            // Average opacity
+            let opacity = 1;
+            if (pz > 800) {
+              opacity = (1000 - pz) / 200;
+            } else if (pz < 150) {
+              opacity = (pz - 10) / 140;
+            }
+            opacity = Math.max(0, Math.min(1, opacity)) * 0.18 * (1 - dist / 220);
+            
+            const mx = mouseX * (1 - pz / 1200);
+            const my = mouseY * (1 - pz / 1200);
+
+            const x1 = (objects[i].x - mx) * (d / (objects[i].z + d)) + width / 2;
+            const y1 = (objects[i].y - my) * (d / (objects[i].z + d)) + height / 2;
+            const x2 = (objects[j].x - mx) * (d / (objects[j].z + d)) + width / 2;
+            const y2 = (objects[j].y - my) * (d / (objects[j].z + d)) + height / 2;
+
             ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(77, 107, 255, ${(1 - dist / 130) * 0.08})`;
-            ctx.lineWidth = 0.5;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = `rgba(100, 150, 255, ${opacity})`;
             ctx.stroke();
           }
         }
@@ -79,14 +288,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { const op = p.update(); p.draw(op); });
-      drawConnections();
+      ctx.clearRect(0, 0, width, height);
+
+      mouseX += (targetMouseX - mouseX) * 0.05;
+      mouseY += (targetMouseY - mouseY) * 0.05;
+
+      objects.sort((a, b) => b.z - a.z);
+
+      objects.forEach(obj => {
+        obj.update();
+        obj.draw();
+      });
+
+      draw3DConnections();
+
       requestAnimationFrame(animate);
     }
     animate();
-
-    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
   }
 
 
