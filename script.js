@@ -449,19 +449,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ========== Animated Counters ==========
-  const statValues = document.querySelectorAll('.stat-value[data-count]');
+  const statCards = document.querySelectorAll('.stat-card[data-count]');
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-count'));
-        animateCount(el, target);
-        counterObserver.unobserve(el);
+        const card = entry.target;
+        const valueEl = card.querySelector('.stat-value') || card.querySelector('.stat-number');
+        if (valueEl) {
+          const target = parseInt(card.getAttribute('data-count'));
+          animateCount(valueEl, target);
+        }
+        counterObserver.unobserve(card);
       }
     });
   }, { threshold: 0.5 });
 
-  statValues.forEach(el => counterObserver.observe(el));
+  statCards.forEach(el => counterObserver.observe(el));
 
   function animateCount(el, target) {
     const duration = 2000;
@@ -469,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function tick(now) {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target) + '+';
+      el.textContent = Math.floor(eased * target) + (target > 1000 ? '+' : (target < 100 ? '+' : ''));
       if (progress < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -517,6 +520,83 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(typeEffect, timeout);
     }
     setTimeout(typeEffect, 4000);
+  }
+
+  // ========== Custom Cursor ==========
+  const cursor = document.getElementById('liquidCursor');
+  if (cursor && !window.matchMedia("(pointer: coarse)").matches) {
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
+    });
+    
+    const interactables = document.querySelectorAll('a, button, input, textarea, .glass-card');
+    interactables.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  } else if (cursor) {
+    cursor.style.display = 'none'; // hide on touch devices
+  }
+
+  // ========== Interactive Terminal ==========
+  const termInput = document.getElementById('terminalInput');
+  const termBody = document.getElementById('terminalBody');
+  const termSection = document.getElementById('terminal-section');
+  
+  if (termInput && termBody && termSection) {
+    termSection.addEventListener('click', () => termInput.focus());
+    
+    termInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const cmd = this.value.trim().toLowerCase();
+        this.value = '';
+        
+        // Echo command
+        const echoLine = document.createElement('div');
+        echoLine.className = 'term-line';
+        echoLine.innerHTML = `<span class="term-prompt">kingsley@ai-workflow:~$</span>${cmd}`;
+        termBody.insertBefore(echoLine, termBody.lastElementChild);
+        
+        // Process command
+        const outLine = document.createElement('div');
+        outLine.className = 'term-line';
+        
+        switch(cmd) {
+          case 'help':
+            outLine.innerHTML = `Available commands:<br>
+              <span class="term-highlight">whoami</span>   - Print bio information<br>
+              <span class="term-highlight">projects</span> - List core projects<br>
+              <span class="term-highlight">skills</span>   - Display tech stack<br>
+              <span class="term-highlight">contact</span>  - Get contact info<br>
+              <span class="term-highlight">clear</span>    - Clear terminal window`;
+            break;
+          case 'whoami':
+            outLine.innerHTML = `Kingsley (Afolabi Joshua)<br>Role: AI Automation & Workflow Engineer<br>Status: Available for opportunities`;
+            break;
+          case 'projects':
+            outLine.innerHTML = `1. AI Workflow Orchestrator (n8n, Python)<br>2. Smart Betting Analytics (Node.js)<br>3. Prompt Engineering Toolkit (FastAPI)<br>4. WhatsApp Gemini Bot (AI Chatbot)`;
+            break;
+          case 'skills':
+            outLine.innerHTML = `[Python] [JavaScript] [Node.js] [React]<br>[OpenAI] [LangChain] [n8n] [Make.com]`;
+            break;
+          case 'contact':
+            outLine.innerHTML = `Email: joshuaking0037@outlook.com<br>GitHub: joshuaking0037-beep<br>X: @kingsley00_7`;
+            break;
+          case 'clear':
+            const initialLines = Array.from(termBody.children).slice(-1);
+            termBody.innerHTML = '';
+            termBody.appendChild(initialLines[0]);
+            return;
+          case '':
+            return;
+          default:
+            outLine.innerHTML = `Command not found: ${cmd}. Type <span class="term-highlight">'help'</span> for a list of commands.`;
+        }
+        
+        termBody.insertBefore(outLine, termBody.lastElementChild);
+        termBody.scrollTop = termBody.scrollHeight;
+      }
+    });
   }
 
 });
