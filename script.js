@@ -1,11 +1,40 @@
 /* ========================================================
    LIQUID GLASS PORTFOLIO — Interactive JavaScript
    3D glass effects, particles, scroll animations
+   Includes: Theme Toggle, Enhanced 3D Background Engine
    ======================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ========== Theme Toggle (Light / Dark Mode) ==========
+  // Reads saved preference from localStorage, falls back to 'light'
+  const THEME_KEY = 'portfolio-theme';
+
+  function getStoredTheme() {
+    return localStorage.getItem(THEME_KEY) || 'light';
+  }
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem(THEME_KEY, theme);
+  }
+
+  // Apply saved theme immediately (no flash)
+  setTheme(getStoredTheme());
+
+  // Wire up any theme-toggle buttons on the page
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+    });
+  });
+
+
   // ========== 3D Background Canvas ==========
+  // Enhanced 3D engine with smooth floating motion, engineering symbols,
+  // wireframe shapes, gears, and dynamic connection lines.
   const canvas = document.getElementById('bgCanvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
@@ -13,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let height = window.innerHeight;
     let mouseX = 0, mouseY = 0;
     let targetMouseX = 0, targetMouseY = 0;
+    let time = 0; // global time for wave-based drift
 
     function resizeCanvas() {
       width = window.innerWidth;
@@ -47,24 +77,34 @@ document.addEventListener('DOMContentLoaded', () => {
     class Object3D {
       constructor() {
         this.reset(true);
+        // Each object gets a unique phase offset for sinusoidal drifting
+        this.driftPhaseX = Math.random() * Math.PI * 2;
+        this.driftPhaseY = Math.random() * Math.PI * 2;
+        this.driftPhaseZ = Math.random() * Math.PI * 2;
+        this.driftAmplitudeX = 30 + Math.random() * 50;
+        this.driftAmplitudeY = 20 + Math.random() * 40;
+        this.driftSpeedX = 0.0003 + Math.random() * 0.0006;
+        this.driftSpeedY = 0.0004 + Math.random() * 0.0005;
       }
 
       reset(init = false) {
         // Random position in space
-        this.x = (Math.random() - 0.5) * width * 1.5;
-        this.y = (Math.random() - 0.5) * height * 1.5;
+        this.baseX = (Math.random() - 0.5) * width * 1.5;
+        this.baseY = (Math.random() - 0.5) * height * 1.5;
+        this.x = this.baseX;
+        this.y = this.baseY;
         this.z = init ? Math.random() * 1000 : 1000; // start far away
 
         // Rotation angles and speeds
         this.rx = Math.random() * Math.PI * 2;
         this.ry = Math.random() * Math.PI * 2;
         this.rz = Math.random() * Math.PI * 2;
-        this.rotSpeedX = (Math.random() - 0.5) * 0.012;
-        this.rotSpeedY = (Math.random() - 0.5) * 0.012;
-        this.rotSpeedZ = (Math.random() - 0.5) * 0.012;
+        this.rotSpeedX = (Math.random() - 0.5) * 0.008;
+        this.rotSpeedY = (Math.random() - 0.5) * 0.008;
+        this.rotSpeedZ = (Math.random() - 0.5) * 0.008;
 
-        // Speed moving towards screen
-        this.speedZ = -0.3 - Math.random() * 0.5;
+        // Speed moving towards screen (slow floating)
+        this.speedZ = -0.15 - Math.random() * 0.25;
 
         // Color theme
         const colors = [
@@ -77,13 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Select type
         const rand = Math.random();
-        if (rand < 0.65) {
+        if (rand < 0.60) {
           this.type = 'text';
-          const symbols = ['⚙', '{ }', '</>', '∫', '∑', '∞', 'π', 'λ', '⌬', 'Δ', '⚡', '⏣', 'd/dx'];
+          const symbols = ['⚙', '{ }', '</>', '∫', '∑', '∞', 'π', 'λ', '⌬', 'Δ', '⚡', '⏣', 'd/dx', '∂', '≈', 'Ω', 'φ', '∇', '⊕', '⊗'];
           this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
-        } else if (rand < 0.85) {
+        } else if (rand < 0.82) {
           this.type = 'wireframe';
-          const shapes = ['cube', 'pyramid', 'benzene'];
+          const shapes = ['cube', 'pyramid', 'benzene', 'octahedron'];
           this.shape = shapes[Math.floor(Math.random() * shapes.length)];
           this.initGeometry();
         } else {
@@ -94,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       initGeometry() {
         if (this.shape === 'cube') {
-          const s = 30;
+          const s = 28;
           this.vertices = [
             [-s, -s, -s], [s, -s, -s], [s, s, -s], [-s, s, -s],
             [-s, -s, s], [s, -s, s], [s, s, s], [-s, s, s]
@@ -105,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             [0,4], [1,5], [2,6], [3,7]
           ];
         } else if (this.shape === 'pyramid') {
-          const s = 35;
+          const s = 32;
           this.vertices = [
             [0, -s, 0], [-s, s, -s], [s, s, -s], [s, s, s], [-s, s, s]
           ];
@@ -114,8 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
             [1,2], [2,3], [3,4], [4,1]
           ];
         } else if (this.shape === 'benzene') {
-          const r = 30;
-          const h = 12;
+          const r = 28;
+          const h = 10;
           this.vertices = [];
           this.edges = [];
           for (let i = 0; i < 6; i++) {
@@ -130,13 +170,24 @@ document.addEventListener('DOMContentLoaded', () => {
             this.edges.push([idx, nextIdx]);
             this.edges.push([idx + 1, nextIdx + 1]);
           }
+        } else if (this.shape === 'octahedron') {
+          const s = 28;
+          this.vertices = [
+            [0, -s, 0], [s, 0, 0], [0, 0, s],
+            [-s, 0, 0], [0, 0, -s], [0, s, 0]
+          ];
+          this.edges = [
+            [0,1], [0,2], [0,3], [0,4],
+            [5,1], [5,2], [5,3], [5,4],
+            [1,2], [2,3], [3,4], [4,1]
+          ];
         }
       }
 
       initGearGeometry() {
-        const rInner = 24;
-        const rOuter = 34;
-        const h = 10;
+        const rInner = 22;
+        const rOuter = 32;
+        const h = 8;
         const teeth = 8;
         const segments = teeth * 2;
         this.vertices = [];
@@ -160,11 +211,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      update() {
+      update(t) {
         this.z += this.speedZ;
         this.rx += this.rotSpeedX;
         this.ry += this.rotSpeedY;
         this.rz += this.rotSpeedZ;
+
+        // Smooth sinusoidal drifting for a "floating in space" feel
+        this.x = this.baseX + Math.sin(t * this.driftSpeedX + this.driftPhaseX) * this.driftAmplitudeX;
+        this.y = this.baseY + Math.cos(t * this.driftSpeedY + this.driftPhaseY) * this.driftAmplitudeY;
+
         if (this.z < 10) {
           this.reset(false);
         }
@@ -172,8 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       draw() {
         const d = 400;
-        const mx = mouseX * (1 - this.z / 1200);
-        const my = mouseY * (1 - this.z / 1200);
+        const parallaxFactor = (1 - this.z / 1200);
+        const mx = mouseX * parallaxFactor * 0.08;
+        const my = mouseY * parallaxFactor * 0.08;
         
         let px = this.x - mx;
         let py = this.y - my;
@@ -191,13 +248,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (this.z < 150) {
           opacity = (this.z - 10) / 140;
         }
-        opacity = Math.max(0, Math.min(1, opacity)) * 0.45;
+        opacity = Math.max(0, Math.min(1, opacity)) * 0.5;
 
         ctx.fillStyle = this.colorPrefix + opacity + ')';
         ctx.strokeStyle = this.colorPrefix + (opacity * 0.85) + ')';
 
         if (this.type === 'text') {
-          ctx.font = `${Math.floor(16 + scale * 14)}px ${this.symbol.length > 2 ? 'var(--font-mono)' : 'var(--font-sans)'}`;
+          const fontSize = Math.floor(14 + scale * 16);
+          ctx.font = `${fontSize}px ${this.symbol.length > 2 ? '"JetBrains Mono", monospace' : '"Inter", sans-serif'}`;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           
@@ -207,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ctx.fillText(this.symbol, 0, 0);
           ctx.restore();
         } else {
-          ctx.lineWidth = 0.8 + scale * 0.8;
+          ctx.lineWidth = 0.7 + scale * 0.7;
           ctx.beginPath();
 
           const projectedPoints = this.vertices.map(v => {
@@ -239,8 +297,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // Create pool of 3D objects
     const objects = [];
-    const objectCount = 35;
+    const objectCount = Math.min(40, Math.max(20, Math.floor(width / 40)));
     for (let i = 0; i < objectCount; i++) {
       objects.push(new Object3D());
     }
@@ -255,10 +314,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const dz = objects[i].z - objects[j].z;
           const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
           
-          if (dist < 220) {
+          if (dist < 250) {
             const pz = (objects[i].z + objects[j].z) / 2;
             const d = 400;
-            const scale = d / (pz + d);
             
             // Average opacity
             let opacity = 1;
@@ -267,10 +325,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (pz < 150) {
               opacity = (pz - 10) / 140;
             }
-            opacity = Math.max(0, Math.min(1, opacity)) * 0.18 * (1 - dist / 220);
+            opacity = Math.max(0, Math.min(1, opacity)) * 0.14 * (1 - dist / 250);
             
-            const mx = mouseX * (1 - pz / 1200);
-            const my = mouseY * (1 - pz / 1200);
+            const parallax = (1 - pz / 1200) * 0.08;
+            const mx = mouseX * parallax;
+            const my = mouseY * parallax;
 
             const x1 = (objects[i].x - mx) * (d / (objects[i].z + d)) + width / 2;
             const y1 = (objects[i].y - my) * (d / (objects[i].z + d)) + height / 2;
@@ -289,14 +348,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
+      time++;
 
-      mouseX += (targetMouseX - mouseX) * 0.05;
-      mouseY += (targetMouseY - mouseY) * 0.05;
+      mouseX += (targetMouseX - mouseX) * 0.04;
+      mouseY += (targetMouseY - mouseY) * 0.04;
 
       objects.sort((a, b) => b.z - a.z);
 
       objects.forEach(obj => {
-        obj.update();
+        obj.update(time);
         obj.draw();
       });
 
