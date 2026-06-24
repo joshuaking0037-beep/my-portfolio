@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Enhanced 3D engine with smooth floating motion, engineering symbols,
   // wireframe shapes, gears, and dynamic connection lines.
   const canvas = document.getElementById('bgCanvas');
-  if (canvas) {
+  if (canvas && window.innerWidth > 768) {
     const ctx = canvas.getContext('2d');
     let width = window.innerWidth;
     let height = window.innerHeight;

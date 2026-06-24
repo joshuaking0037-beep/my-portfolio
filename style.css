@@ -519,9 +519,26 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateZ(0);
   transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
 }
-.project-card:hover { transform: translateY(-8px) rotateX(2deg); }
+@media (hover: hover) {
+  .project-card:hover { transform: translateY(-8px) rotateX(2deg); }
+}
 .project-card .project-image { width: 100%; height: 200px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-.project-card .project-icon { font-size: 3.5rem; z-index: 1; position: relative; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+.project-card .project-icon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+  z-index: 3;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-glass);
+}
 .project-card .project-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--glass-bg-solid), rgba(255,255,255,0.3) 60%); z-index: 2; }
 .project-card .project-body { padding: 1.75rem; position: relative; z-index: 3; }
 .project-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; padding: 1.5rem 1.75rem 0; position: relative; z-index: 3; }
@@ -881,27 +898,93 @@ h1, h2, h3, h4, h5, h6 {
   .n8n-details-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
+  /* Flat top nav bar docked to top on mobile */
+  .nav {
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+  }
+  .nav-inner {
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--nav-scrolled-border);
+  }
   .nav-links {
     position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh;
     background: var(--mobile-nav-bg); backdrop-filter: var(--glass-blur-heavy);
     flex-direction: column; align-items: flex-start; padding: 5rem 2rem 2rem; gap: 1.5rem;
     border-left: 1px solid var(--nav-scrolled-border); transition: right var(--duration-normal);
     box-shadow: -10px 0 40px var(--nav-scrolled-shadow);
+    z-index: 150;
   }
   .nav-links.open { right: 0; }
-  .nav-toggle { display: block; }
-  .container { padding: 0 1rem; }
-  .section { padding: 4rem 0; }
-  .hero { padding: 6rem 1rem; }
+  .nav-toggle { display: block; z-index: 200; }
+  
+  .container { padding: 0 1.25rem; }
+  .section { padding: 3.5rem 0; }
+  
+  /* Hero spacing and text balance */
+  .hero { padding: 7rem 1.25rem 4rem; min-height: auto; }
+  .hero-title {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+    margin-bottom: 1rem;
+  }
+  .hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Compact services & forms */
+  .services-grid { gap: 1rem; }
+  .service-card { padding: 1.5rem; }
   .contact-form-card { padding: 1.5rem; }
   .theme-toggle { bottom: 1.5rem; right: 1.5rem; width: 46px; height: 46px; }
   .project-detail-banner { height: 220px; }
+  
+  /* Clean 2-column metrics dashboard on mobile */
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .stat-card {
+    padding: 1.25rem 0.75rem;
+  }
+  .stat-card .stat-value {
+    font-size: 1.8rem;
+  }
+  .stat-card .stat-label {
+    font-size: 0.65rem;
+  }
 }
 @media (max-width: 480px) {
+  /* Stack buttons vertically on small phones */
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    gap: 0.75rem;
+  }
+  .hero-actions .btn {
+    width: 100%;
+  }
   .term-prompt { font-size: 0.8rem; margin-right: 4px; }
   .term-input { font-size: 0.8rem; }
   .terminal-header { padding: 8px 12px; }
   .terminal-body { padding: 12px; min-height: 200px; }
+}
+@media (pointer: coarse) {
+  /* Completely hide custom cursor on touch devices */
+  .liquid-cursor { display: none !important; }
 }
 
 /* ---------- Scrollbar ---------- */
