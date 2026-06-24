@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Connect close objects in 3D space to form a dynamic network
     function draw3DConnections() {
-      ctx.lineWidth = 0.4;
+      ctx.lineWidth = 0.2;
       for (let i = 0; i < objects.length; i++) {
         for (let j = i + 1; j < objects.length; j++) {
           const dx = objects[i].x - objects[j].x;
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.beginPath();
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
-            ctx.strokeStyle = `rgba(100, 150, 255, ${opacity})`;
+            ctx.strokeStyle = `rgba(255, 107, 0, ${opacity * 0.6})`;
             ctx.stroke();
           }
         }

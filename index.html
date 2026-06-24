@@ -29,6 +29,9 @@
   <!-- ============ CUSTOM CURSOR ============ -->
   <div class="liquid-cursor" id="liquidCursor"></div>
 
+  <!-- ============ NOISE OVERLAY ============ -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
   <!-- ============ BACKGROUND MESH ============ -->
   <div class="bg-mesh" aria-hidden="true">
     <canvas id="bgCanvas" class="bg-canvas"></canvas>
@@ -87,12 +90,10 @@
           <span class="status-dot"></span>
           Available for opportunities
         </div>
-        <h1 class="hero-title">
-          Hi, I'm <br>
-          <span class="gradient-text name-highlight">Kingsley</span>
-        </h1>
+        <h1 class="hero-title">Kingsley</h1>
+        <p class="hero-subtitle">The <span class="gradient-text">Anti-Slop</span> AI Automation Engineer.</p>
         <p class="hero-description">
-          AI Automation &amp; Workflow Engineer crafting intelligent systems that bridge the gap between artificial intelligence and real-world automation.
+          Designing end-to-end intelligent workflows that bridge the gap between artificial intelligence and real-world execution.
         </p>
         <div class="hero-actions">
           <a href="#projects" class="btn btn-primary">View My Work</a>
@@ -245,6 +246,34 @@
           <div class="service-icon">📊</div>
           <h3>Data Pipelines</h3>
           <p>Building robust web scraping and data processing architectures that feed clean, structured data into your systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION DIVIDER ============ -->
+  <div class="section-divider"></div>
+
+  <!-- ============ N8N WORKFLOW SHOWCASE ============ -->
+  <section class="section showcase-section" id="workflows">
+    <div class="container">
+      <div class="showcase-grid">
+        <div class="showcase-content reveal">
+          <span class="section-eyebrow">// n8n Automation</span>
+          <h2 class="section-title">Visual <span class="gradient-text">Workflows</span></h2>
+          <p class="section-subtitle" style="margin-bottom: 1.5rem;">
+            I design and orchestrate complex business logic using n8n. By leveraging visual, node-based automation, I ensure that all tools across your tech stack communicate flawlessly—eliminating silos and accelerating operational velocity.
+          </p>
+          <ul class="showcase-list">
+            <li><strong>Webhook Triggers:</strong> Real-time event handling.</li>
+            <li><strong>API Integration:</strong> Custom REST/GraphQL node connectivity.</li>
+            <li><strong>Data Transformation:</strong> Clean and format data on the fly.</li>
+          </ul>
+        </div>
+        <div class="showcase-visual reveal reveal-delay-1">
+          <div class="glass-card image-wrapper">
+            <img src="assets/n8n-workflow.png" alt="n8n visual programming workflow" class="showcase-image" />
+          </div>
         </div>
       </div>
     </div>
