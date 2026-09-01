@@ -3,204 +3,171 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kingsley (Afolabi Joshua) — AI Automation & Workflow Engineer crafting intelligent systems that bridge the gap between artificial intelligence and real-world automation.">
-  <meta name="keywords" content="AI Automation, Workflow Engineer, Portfolio, Kingsley, Afolabi Joshua, Python, LangChain, OpenAI, Machine Learning">
+  <meta name="description" content="Kingsley (Afolabi Joshua) — AI Automation & Workflow Engineer crafting intelligent systems that bridge AI and real-world execution.">
+  <meta name="keywords" content="AI Automation, Workflow Engineer, Portfolio, Kingsley, Afolabi Joshua, Python, LangChain, OpenAI">
   <meta name="author" content="Kingsley (Afolabi Joshua)">
-  <meta name="robots" content="index, follow">
   <meta property="og:title" content="Kingsley — AI Automation & Workflow Engineer">
-  <meta property="og:description" content="AI Automation & Workflow Engineer crafting intelligent systems that bridge the gap between artificial intelligence and real-world automation.">
+  <meta property="og:description" content="AI Automation & Workflow Engineer crafting intelligent systems that bridge AI and real-world execution.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://kingsley.dev">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Kingsley — AI Automation & Workflow Engineer">
-  <meta name="twitter:description" content="AI Automation & Workflow Engineer crafting intelligent systems that bridge the gap between artificial intelligence and real-world automation.">
   <title>Kingsley — AI Automation & Workflow Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <!-- Apply saved theme before paint to prevent flash -->
   <script>
     (function() {
-      var t = localStorage.getItem('portfolio-theme') || 'light';
+      var t = localStorage.getItem('portfolio-theme') || 'dark';
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
 </head>
 <body>
 
-  <!-- ============ CUSTOM CURSOR ============ -->
-  <div class="liquid-cursor" id="liquidCursor"></div>
-
   <!-- ============ NOISE OVERLAY ============ -->
   <div class="noise-overlay" aria-hidden="true"></div>
 
-  <!-- ============ BACKGROUND MESH ============ -->
-  <div class="bg-mesh" aria-hidden="true">
-    <canvas id="bgCanvas" class="bg-canvas"></canvas>
-    <div class="bg-orb bg-orb--1"></div>
-    <div class="bg-orb bg-orb--2"></div>
-    <div class="bg-orb bg-orb--3"></div>
-    <div class="bg-orb bg-orb--4"></div>
+  <!-- ============ MENU OVERLAY ============ -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <nav class="menu-nav">
+      <div class="menu-top">
+        <span class="menu-logo">Kingsley</span>
+        <button class="menu-close" id="menuClose" aria-label="Close menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <ul class="menu-links">
+        <li><a href="index.html" class="menu-link">Home</a></li>
+        <li><a href="#about" class="menu-link">About</a></li>
+        <li><a href="#projects" class="menu-link">Projects</a></li>
+        <li><a href="#services" class="menu-link">Services</a></li>
+        <li><a href="contact.html" class="menu-link">Contact</a></li>
+      </ul>
+      <div class="menu-footer">
+        <a href="https://github.com/joshuaking0037-beep" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/afolabi-joshua-794917201" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://x.com/kingsley00_7" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+    </nav>
   </div>
 
-  <!-- ============ THEME TOGGLE ============ -->
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Switch theme">
-    <!-- Sun icon (shown in dark mode) -->
-    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="5"/>
-      <line x1="12" y1="1" x2="12" y2="3"/>
-      <line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/>
-      <line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </svg>
-    <!-- Moon icon (shown in light mode) -->
-    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-    </svg>
-  </button>
-
-  <!-- ============ NAVIGATION ============ -->
-  <nav class="nav" id="navbar">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <span class="logo-name">Kingsley</span>
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="#resume" id="navResumeLink">Resume</a></li>
-        <li><a href="contact.html" class="nav-cta">Let's Talk</a></li>
-      </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
+  <!-- ============ HEADER / NAV ============ -->
+  <header class="site-header" id="siteHeader">
+    <a href="index.html" class="site-logo">Kingsley</a>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="contact.html" class="header-cta">Let's Talk</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        Menu
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
-  </nav>
-  <div class="nav-overlay" id="navOverlay"></div>
+  </header>
 
   <!-- ============ HERO SECTION ============ -->
   <section class="hero" id="hero">
-    <div class="container">
-      <div class="hero-content reveal">
-        <div class="hero-status">
-          <span class="status-dot"></span>
-          Available for opportunities
-        </div>
-        <h1 class="hero-title">Kingsley</h1>
-        <p class="hero-subtitle">The <span class="gradient-text">Anti-Slop</span> AI Automation Engineer.</p>
-        <p class="hero-description">
-          Designing end-to-end intelligent workflows that bridge the gap between artificial intelligence and real-world execution.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">View My Work</a>
-          <a href="#resume" id="heroResumeBtn" class="btn btn-glass">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Resume
-          </a>
-          <a href="contact.html" class="btn btn-glass">Let's Talk</a>
-        </div>
-      </div>
-      <div class="scroll-indicator">
-        <div class="scroll-line"></div>
-      </div>
+    <!-- Full-bleed background image -->
+    <div class="hero-bg">
+      <img src="assets/hero-bg.png" alt="Cinematic AI Landscape" class="hero-bg-img">
+      <div class="hero-bg-overlay"></div>
     </div>
-  </section>
 
-  <!-- ============ INTERACTIVE TERMINAL ============ -->
-  <section class="section" id="terminal-section" style="padding-top: 0;">
-    <div class="container">
-      <div class="terminal-container glass-card reveal">
-        <div class="liquid-shimmer"></div>
-        <div class="terminal-header">
-          <div class="terminal-buttons">
-            <span class="btn-close"></span>
-            <span class="btn-min"></span>
-            <span class="btn-max"></span>
-          </div>
-          <div class="terminal-title">kingsley@ai-workflow: ~</div>
+    <!-- Floating project preview cards (scattered like real estate site) -->
+    <div class="hero-float-cards" aria-hidden="true">
+      <div class="float-card float-card--1">
+        <span class="float-card-icon">🤖</span>
+        <div class="float-card-info">
+          <span class="float-card-label">AI AUTOMATION</span>
+          <span class="float-card-title">AI Workflow Orchestrator</span>
         </div>
-        <div class="terminal-body" id="terminalBody">
-          <div class="term-line">Welcome to Kingsley's Interactive Shell v2.0</div>
-          <div class="term-line">Type <span class="term-highlight">'help'</span> to see available commands.</div>
-          <div class="term-input-line">
-            <span class="term-prompt">kingsley@ai-workflow:~$</span>
-            <input type="text" id="terminalInput" class="term-input" autocomplete="off" spellcheck="false" autofocus>
-          </div>
+      </div>
+      <div class="float-card float-card--2">
+        <span class="float-card-icon">⚡</span>
+        <div class="float-card-info">
+          <span class="float-card-label">WEB APP</span>
+          <span class="float-card-title">Smart Betting Analytics</span>
+        </div>
+      </div>
+      <div class="float-card float-card--3">
+        <span class="float-card-icon">📱</span>
+        <div class="float-card-info">
+          <span class="float-card-label">AI CHATBOT</span>
+          <span class="float-card-title">WhatsApp Gemini Bot</span>
+        </div>
+      </div>
+      <div class="float-card float-card--4">
+        <span class="float-card-icon">🧠</span>
+        <div class="float-card-info">
+          <span class="float-card-label">AI TOOL</span>
+          <span class="float-card-title">Prompt Engineering Toolkit</span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ============ SECTION DIVIDER ============ -->
-  <div class="section-divider"></div>
+    <!-- Hero text at the bottom (like the samples) -->
+    <div class="hero-bottom">
+      <div class="hero-tag">
+        <span class="status-dot"></span>
+        Available for opportunities
+      </div>
+      <h1 class="hero-title">Hi, I'm Kingsley.</h1>
+      <p class="hero-sub">AI Automation &amp; Workflow Engineer</p>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="scroll-cue">
+      <div class="scroll-cue-line"></div>
+    </div>
+  </section>
 
   <!-- ============ ABOUT SECTION ============ -->
   <section class="section" id="about">
     <div class="container">
-      <div class="section-header reveal">
-        <span class="section-eyebrow">// About Me</span>
-        <h2 class="section-title">Designing the Future with <span class="gradient-text">Intelligence</span></h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p>
-            I'm <strong>Afolabi Joshua</strong>, known as Kingsley — an AI Automation &amp; Workflow Engineer passionate about building intelligent systems that actually work. I specialize in designing end-to-end automation pipelines that leverage the latest in artificial intelligence to solve real-world problems.
-          </p>
-          <p>
-            My work sits at the intersection of AI and practical engineering. From orchestrating multi-agent AI workflows to building data-driven web applications, I focus on creating solutions that are not just technically sound but genuinely impactful. Every system I build is crafted with purpose, performance, and scalability in mind.
-          </p>
-          <p>
-            When I'm not engineering automation pipelines or fine-tuning AI prompts, I'm exploring the cutting edge of what's possible with technology — always learning, always building, always pushing boundaries.
-          </p>
+      <div class="about-layout">
+        <div class="about-left reveal">
+          <span class="eyebrow">// About Me</span>
+          <h2 class="section-title">Designing the Future with <span class="accent-text">Intelligence</span></h2>
+          <p>I'm <strong>Afolabi Joshua</strong>, known as Kingsley — an AI Automation &amp; Workflow Engineer building intelligent systems that actually work. I specialize in end-to-end automation pipelines that leverage the latest AI to solve real-world problems.</p>
+          <p>My work sits at the intersection of AI and practical engineering. From orchestrating multi-agent workflows to building data-driven web apps, I craft solutions that are technically sound and genuinely impactful.</p>
           <div class="skills-cloud">
-            <span class="skill-tag skill-tag--cyan">Python</span>
-            <span class="skill-tag skill-tag--cyan">AI/ML</span>
-            <span class="skill-tag skill-tag--purple">Automation</span>
-            <span class="skill-tag skill-tag--blue">JavaScript</span>
-            <span class="skill-tag skill-tag--cyan">Node.js</span>
-            <span class="skill-tag skill-tag--purple">LangChain</span>
-            <span class="skill-tag skill-tag--pink">React</span>
-            <span class="skill-tag skill-tag--teal">APIs</span>
-            <span class="skill-tag skill-tag--blue">HTML/CSS</span>
-            <span class="skill-tag skill-tag--cyan">OpenAI</span>
-            <span class="skill-tag skill-tag--purple">n8n</span>
-            <span class="skill-tag skill-tag--teal">Git</span>
-            <span class="skill-tag skill-tag--pink">UI/UX Design</span>
-            <span class="skill-tag skill-tag--blue">Prompt Engineering</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">AI/ML</span>
+            <span class="skill-tag">LangChain</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">OpenAI</span>
+            <span class="skill-tag">n8n</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Prompt Engineering</span>
           </div>
         </div>
-        <div class="dashboard-stats reveal">
-          <div class="dashboard-header">
-            <span class="live-indicator"></span> LIVE SYSTEM METRICS
-          </div>
-          <div class="stats-grid">
-            <div class="glass-card stat-card stat-card--dashboard" data-count="142">
-              <div class="liquid-shimmer"></div>
-              <div class="glass-glow"></div>
-              <div class="stat-value stat-value--dashboard">0</div>
-              <div class="stat-label">Workflows Orchestrated</div>
+        <div class="about-right reveal">
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-value" data-count="142">0</div>
+              <div class="metric-label">Workflows Built</div>
             </div>
-            <div class="glass-card stat-card stat-card--dashboard" data-count="1200">
-              <div class="liquid-shimmer"></div>
-              <div class="glass-glow"></div>
-              <div class="stat-value stat-value--dashboard">0</div>
-              <div class="stat-label">Est. Hours Saved</div>
+            <div class="metric-card">
+              <div class="metric-value" data-count="1200">0</div>
+              <div class="metric-label">Hours Saved</div>
             </div>
-            <div class="glass-card stat-card stat-card--dashboard" data-count="50">
-              <div class="liquid-shimmer"></div>
-              <div class="glass-glow"></div>
-              <div class="stat-value stat-value--dashboard">0</div>
-              <div class="stat-label">k+ API Requests</div>
+            <div class="metric-card">
+              <div class="metric-value" data-count="50">0</div>
+              <div class="metric-label">k+ API Requests</div>
             </div>
-            <div class="glass-card stat-card stat-card--dashboard" data-count="15">
-              <div class="liquid-shimmer"></div>
-              <div class="glass-glow"></div>
-              <div class="stat-value stat-value--dashboard">0</div>
-              <div class="stat-label">Projects Delivered</div>
+            <div class="metric-card">
+              <div class="metric-value" data-count="15">0</div>
+              <div class="metric-label">Projects Delivered</div>
             </div>
           </div>
         </div>
@@ -208,221 +175,215 @@
     </div>
   </section>
 
-  <!-- ============ SECTION DIVIDER ============ -->
-  <div class="section-divider"></div>
-
   <!-- ============ SERVICES SECTION ============ -->
-  <section class="section" id="services">
+  <section class="section section--alt" id="services">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-eyebrow">// What I Do</span>
-        <h2 class="section-title">End-to-End <span class="gradient-text">Automation</span></h2>
+        <span class="eyebrow">// What I Do</span>
+        <h2 class="section-title">End-to-End <span class="accent-text">Automation</span></h2>
       </div>
       <div class="services-grid">
-        <div class="service-card glass-card reveal">
-          <div class="liquid-shimmer"></div>
-          <div class="glass-glow"></div>
+        <div class="service-card reveal">
           <div class="service-icon">🤖</div>
           <h3>Custom AI Chatbots</h3>
           <p>Intelligent, context-aware chatbots trained on your business data for customer service or internal knowledge bases.</p>
         </div>
-        <div class="service-card glass-card reveal reveal-delay-1">
-          <div class="liquid-shimmer"></div>
-          <div class="glass-glow"></div>
+        <div class="service-card reveal">
           <div class="service-icon">⚡</div>
           <h3>Workflow Automation</h3>
           <p>Seamless integrations using n8n, Zapier, and Make to connect your tools and eliminate manual, repetitive tasks.</p>
         </div>
-        <div class="service-card glass-card reveal">
-          <div class="liquid-shimmer"></div>
-          <div class="glass-glow"></div>
+        <div class="service-card reveal">
           <div class="service-icon">🧠</div>
           <h3>Prompt Engineering</h3>
-          <p>Optimizing and fine-tuning Large Language Models (LLMs) to ensure highly accurate, reliable, and consistent outputs.</p>
+          <p>Optimizing Large Language Models to ensure highly accurate, reliable, and consistent outputs for your use case.</p>
         </div>
-        <div class="service-card glass-card reveal reveal-delay-1">
-          <div class="liquid-shimmer"></div>
-          <div class="glass-glow"></div>
+        <div class="service-card reveal">
           <div class="service-icon">📊</div>
           <h3>Data Pipelines</h3>
-          <p>Building robust web scraping and data processing architectures that feed clean, structured data into your systems.</p>
+          <p>Robust data processing architectures that feed clean, structured data into your systems reliably at scale.</p>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ============ SECTION DIVIDER ============ -->
-  <div class="section-divider"></div>
-
-  <!-- ============ N8N WORKFLOW SHOWCASE ============ -->
-  <section class="section showcase-section" id="workflows">
-    <div class="container">
-      <div class="showcase-grid">
-        <div class="showcase-content reveal">
-          <span class="section-eyebrow">// n8n Automation</span>
-          <h2 class="section-title">Visual <span class="gradient-text">Workflows</span></h2>
-          <p class="section-subtitle" style="margin-bottom: 1.5rem;">
-            I design and orchestrate complex business logic using n8n. By leveraging visual, node-based automation, I ensure that all tools across your tech stack communicate flawlessly—eliminating silos and accelerating operational velocity.
-          </p>
-          <ul class="showcase-list">
-            <li><strong>Webhook Triggers:</strong> Real-time event handling.</li>
-            <li><strong>API Integration:</strong> Custom REST/GraphQL node connectivity.</li>
-            <li><strong>Data Transformation:</strong> Clean and format data on the fly.</li>
-          </ul>
-        </div>
-        <div class="showcase-visual reveal reveal-delay-1">
-          <div class="glass-card image-wrapper">
-            <img src="assets/n8n-workflow.png" alt="n8n visual programming workflow" class="showcase-image" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SECTION DIVIDER ============ -->
-  <div class="section-divider"></div>
 
   <!-- ============ PROJECTS SECTION ============ -->
   <section class="section" id="projects">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-eyebrow">// Selected Work</span>
-        <h2 class="section-title">Projects That <span class="gradient-text">Matter</span></h2>
-        <p class="section-subtitle">A curated selection of projects that showcase my expertise in AI automation, web development, and intelligent system design.</p>
+        <span class="eyebrow">// Selected Work</span>
+        <h2 class="section-title">Projects That <span class="accent-text">Matter</span></h2>
       </div>
       <div class="projects-grid">
 
-        <!-- Project 1 -->
-        <a href="project-ai-workflow.html" class="project-card project-card--cyan glass-card reveal">
-          <div class="liquid-shimmer"></div>
-          <div class="glass-glow"></div>
-          <div class="project-image">
-            <span class="project-icon">🤖</span>
-            <img src="assets/ai-workflow.png" alt="AI Workflow Orchestrator" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+        <a href="project-ai-workflow.html" class="project-card reveal">
+          <div class="project-card-img">
+            <img src="assets/ai-workflow.png" alt="AI Workflow Orchestrator">
+            <span class="project-card-tag">AI AUTOMATION</span>
           </div>
-          <div class="project-header" style="padding-top: 1rem;">
-            <span class="project-type">AI AUTOMATION</span>
+          <div class="project-card-body">
+            <h3>AI Workflow Orchestrator</h3>
+            <p>An intelligent pipeline system chaining multiple AI agents to automate complex business workflows.</p>
+            <div class="project-techs">
+              <span>Python</span><span>LangChain</span><span>OpenAI</span><span>n8n</span>
+            </div>
+            <span class="project-link">View Project →</span>
           </div>
-          <h3 class="project-name">AI Workflow Orchestrator</h3>
-          <p class="project-desc">An intelligent pipeline system that chains multiple AI agents together to automate complex business workflows.</p>
-          <div class="project-tech">
-            <span>Python</span>
-            <span>LangChain</span>
-            <span>OpenAI</span>
-            <span>n8n</span>
-          </div>
-          <span class="view-project">View Project <span class="arrow">→</span></span>
         </a>
 
-        <!-- Project 2 -->
-        <a href="project-betting-analytics.html" class="project-card project-card--purple glass-card reveal">
-          <div class="liquid-shimmer"></div>
-          <div class="glass-glow"></div>
-          <div class="project-image">
-            <span class="project-icon">⚡</span>
-            <img src="assets/betting-analytics.png" alt="Smart Betting Analytics" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+        <a href="project-betting-analytics.html" class="project-card reveal">
+          <div class="project-card-img">
+            <img src="assets/betting-analytics.png" alt="Smart Betting Analytics">
+            <span class="project-card-tag">WEB APPLICATION</span>
           </div>
-          <div class="project-header" style="padding-top: 1rem;">
-            <span class="project-type">WEB APPLICATION</span>
+          <div class="project-card-body">
+            <h3>Smart Betting Analytics</h3>
+            <p>A data-driven sports betting platform with real-time odds comparison and predictive modeling.</p>
+            <div class="project-techs">
+              <span>JavaScript</span><span>Node.js</span><span>REST APIs</span><span>Chart.js</span>
+            </div>
+            <span class="project-link">View Project →</span>
           </div>
-          <h3 class="project-name">Smart Betting Analytics</h3>
-          <p class="project-desc">A data-driven sports betting analytics platform with real-time odds comparison and predictive modeling.</p>
-          <div class="project-tech">
-            <span>JavaScript</span>
-            <span>Node.js</span>
-            <span>REST APIs</span>
-            <span>Chart.js</span>
-          </div>
-          <span class="view-project">View Project <span class="arrow">→</span></span>
         </a>
 
-        <!-- Project 3 -->
-        <a href="project-portfolio.html" class="project-card project-card--blue glass-card reveal">
-          <div class="liquid-shimmer"></div>
-          <div class="glass-glow"></div>
-          <div class="project-image">
-            <span class="project-icon">🌐</span>
-            <img src="assets/portfolio.png" alt="Personal Portfolio v2" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+        <a href="project-portfolio.html" class="project-card reveal">
+          <div class="project-card-img">
+            <img src="assets/portfolio.png" alt="Personal Portfolio v2">
+            <span class="project-card-tag">PORTFOLIO</span>
           </div>
-          <div class="project-header" style="padding-top: 1rem;">
-            <span class="project-type">PORTFOLIO</span>
+          <div class="project-card-body">
+            <h3>Personal Portfolio v2</h3>
+            <p>A cutting-edge portfolio website featuring cinematic design, interactive particle systems, and fluid animations.</p>
+            <div class="project-techs">
+              <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Canvas API</span>
+            </div>
+            <span class="project-link">View Project →</span>
           </div>
-          <h3 class="project-name">Personal Portfolio v2</h3>
-          <p class="project-desc">A cutting-edge portfolio website featuring liquid glass design, interactive particle systems, and fluid animations.</p>
-          <div class="project-tech">
-            <span>HTML5</span>
-            <span>CSS3</span>
-            <span>JavaScript</span>
-            <span>Canvas API</span>
-          </div>
-          <span class="view-project">View Project <span class="arrow">→</span></span>
         </a>
 
-        <!-- Project 4 -->
-        <a href="project-prompt-toolkit.html" class="project-card project-card--teal glass-card reveal">
-          <div class="liquid-shimmer"></div>
-          <div class="glass-glow"></div>
-          <div class="project-image">
-            <span class="project-icon">🧠</span>
-            <img src="assets/prompt-toolkit.png" alt="Prompt Engineering Toolkit" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+        <a href="project-prompt-toolkit.html" class="project-card reveal">
+          <div class="project-card-img">
+            <img src="assets/prompt-toolkit.png" alt="Prompt Engineering Toolkit">
+            <span class="project-card-tag">AI TOOL</span>
           </div>
-          <div class="project-header" style="padding-top: 1rem;">
-            <span class="project-type">AI TOOL</span>
+          <div class="project-card-body">
+            <h3>Prompt Engineering Toolkit</h3>
+            <p>A comprehensive toolkit for crafting, testing, and optimizing AI prompts with version control and analytics.</p>
+            <div class="project-techs">
+              <span>Python</span><span>OpenAI API</span><span>React</span><span>FastAPI</span>
+            </div>
+            <span class="project-link">View Project →</span>
           </div>
-          <h3 class="project-name">Prompt Engineering Toolkit</h3>
-          <p class="project-desc">A comprehensive toolkit for crafting, testing, and optimizing AI prompts with version control and analytics.</p>
-          <div class="project-tech">
-            <span>Python</span>
-            <span>OpenAI API</span>
-            <span>React</span>
-            <span>FastAPI</span>
-          </div>
-          <span class="view-project">View Project <span class="arrow">→</span></span>
         </a>
 
-        <!-- Project 5 -->
-        <a href="project-whatsapp-bot.html" class="project-card project-card--purple glass-card reveal">
-          <div class="liquid-shimmer"></div>
-          <div class="glass-glow"></div>
-          <div class="project-image">
-            <span class="project-icon">📱</span>
-            <img src="assets/whatsapp-bot.png" alt="WhatsApp Gemini Bot" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+        <a href="project-whatsapp-bot.html" class="project-card reveal">
+          <div class="project-card-img">
+            <img src="assets/whatsapp-bot.png" alt="WhatsApp Gemini Bot">
+            <span class="project-card-tag">CHATBOT</span>
           </div>
-          <div class="project-header" style="padding-top: 1rem;">
-            <span class="project-type">CHATBOT</span>
+          <div class="project-card-body">
+            <h3>WhatsApp Gemini Bot</h3>
+            <p>A multilingual WhatsApp chatbot powered by Google Gemini AI that auto-detects language and maintains conversational memory.</p>
+            <div class="project-techs">
+              <span>Node.js</span><span>Express</span><span>Gemini API</span><span>WhatsApp API</span>
+            </div>
+            <span class="project-link">View Project →</span>
           </div>
-          <h3 class="project-name">WhatsApp Gemini Bot</h3>
-          <p class="project-desc">A multilingual WhatsApp chatbot powered by Google Gemini AI that auto-detects language and maintains conversational memory.</p>
-          <div class="project-tech">
-            <span>Node.js</span>
-            <span>Express</span>
-            <span>Gemini API</span>
-            <span>WhatsApp API</span>
-          </div>
-          <span class="view-project">View Project <span class="arrow">→</span></span>
         </a>
 
+
+        <a href="project-ai-cv-creator.html" class="project-card reveal">
+          <div class="project-card-img">
+            <img src="assets/ai-cv-creator.png" alt="AI Summarizer & CV Creator">
+            <span class="project-card-tag">AI TOOL</span>
+          </div>
+          <div class="project-card-body">
+            <h3>AI Summarizer & CV Creator</h3>
+            <p>An intelligent desktop application that automatically summarizes long documents and generates professionally formatted CVs using LLMs.</p>
+            <div class="project-techs">
+              <span>Python</span><span>OpenAI API</span><span>React</span><span>Electron</span>
+            </div>
+            <span class="project-link">View Project →</span>
+          </div>
+        </a>
+
+        <a href="project-telegram-bot.html" class="project-card reveal">
+          <div class="project-card-img">
+            <img src="assets/telegram-bot.png" alt="Intelligent Telegram Bot">
+            <span class="project-card-tag">CHATBOT</span>
+          </div>
+          <div class="project-card-body">
+            <h3>Intelligent Telegram Bot</h3>
+            <p>A robust Telegram bot providing intelligent automated responses, data fetching, and seamless user interactions.</p>
+            <div class="project-techs">
+              <span>Node.js</span><span>Telegraf</span><span>MongoDB</span><span>REST APIs</span>
+            </div>
+            <span class="project-link">View Project →</span>
+          </div>
+        </a>
+
+        <a href="project-corporate-website.html" class="project-card reveal">
+          <div class="project-card-img">
+            <img src="assets/corporate-website.png" alt="Modern Corporate Website">
+            <span class="project-card-tag">WEB APPLICATION</span>
+          </div>
+          <div class="project-card-body">
+            <h3>Modern Corporate Website</h3>
+            <p>A sleek, cinematic web experience with dynamic scroll animations and high-end typography.</p>
+            <div class="project-techs">
+              <span>HTML5</span><span>CSS3</span><span>GSAP</span><span>JavaScript</span>
+            </div>
+            <span class="project-link">View Project →</span>
+          </div>
+        </a>
+
+        <a href="project-casino-analytics.html" class="project-card reveal">
+          <div class="project-card-img">
+            <img src="assets/casino-analytics.png" alt="Casino Betting Analytics">
+            <span class="project-card-tag">WEB APPLICATION</span>
+          </div>
+          <div class="project-card-body">
+            <h3>Casino Betting Analytics</h3>
+            <p>A data visualization dashboard tracking live casino odds and betting trends with interactive charts.</p>
+            <div class="project-techs">
+              <span>React</span><span>WebSockets</span><span>Chart.js</span><span>Node.js</span>
+            </div>
+            <span class="project-link">View Project →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA SECTION ============ -->
+  <section class="section cta-section" id="contact-cta">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <span class="eyebrow">// Let's Connect</span>
+        <h2 class="cta-title">Ready to build something<br><span class="accent-text">extraordinary?</span></h2>
+        <p class="cta-desc">Whether you have a project in mind, want to collaborate, or just want to say hi — my inbox is always open.</p>
+        <a href="contact.html" class="cta-btn">Get In Touch →</a>
       </div>
     </div>
   </section>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="footer">
+  <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <p class="footer-copy">&copy; 2026 <span class="highlight">Kingsley</span>. Crafted with passion and purpose.</p>
+        <p class="footer-copy">© 2026 <span class="accent-text">Kingsley</span>. Crafted with passion and purpose.</p>
         <div class="footer-socials">
           <a href="https://github.com/joshuaking0037-beep" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           </a>
           <a href="https://www.linkedin.com/in/afolabi-joshua-794917201" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
           <a href="https://x.com/kingsley00_7" target="_blank" rel="noopener noreferrer" aria-label="X">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
           </a>
           <a href="https://www.instagram.com/xins_le" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
         </div>
       </div>
