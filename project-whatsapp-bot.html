@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WhatsApp Gemini Bot | Kingsley</title>
-  <meta name="description" content="WhatsApp Gemini Bot | A multilingual WhatsApp chatbot powered by Google Gemini AI that auto-detects language and maintains conversational memory.">
-  <meta name="keywords" content="WhatsApp Bot, Gemini AI, Node.js, Chatbot, Kingsley">
+  <title>WhatsApp Groq Bot | Kingsley</title>
+  <meta name="description" content="WhatsApp Groq Bot | A multilingual WhatsApp chatbot powered by Groq AI that auto-detects language and maintains conversational memory.">
+  <meta name="keywords" content="WhatsApp Bot, Groq AI, Node.js, Chatbot, Kingsley">
   <meta name="author" content="Kingsley">
-  <meta property="og:title" content="WhatsApp Gemini Bot | Kingsley">
-  <meta property="og:description" content="A multilingual WhatsApp chatbot powered by Google Gemini AI that auto-detects language and maintains conversational memory.">
+  <meta property="og:title" content="WhatsApp Groq Bot | Kingsley">
+  <meta property="og:description" content="A multilingual WhatsApp chatbot powered by Groq AI that auto-detects language and maintains conversational memory.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,7 +85,7 @@
       <span class="separator">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </span>
-      <span class="current">WhatsApp Gemini Bot</span>
+      <span class="current">WhatsApp Groq Bot</span>
     </div>
   </div>
 
@@ -94,9 +94,9 @@
     <div class="container">
       <span class="page-icon">📱</span>
       <span class="page-category">Chatbot</span>
-      <h1>WhatsApp Gemini <span class="accent-text">Bot</span></h1>
+      <h1>WhatsApp Groq <span class="accent-text">Bot</span></h1>
       <p class="page-lead">
-        A multilingual WhatsApp chatbot powered by Google Gemini AI that auto-detects the language of incoming messages, remembers context, and replies naturally.
+        A multilingual WhatsApp auto-responder bot that seamlessly impersonates the user using Groq AI. It dynamically maintains conversational memory to act as a highly intelligent personal assistant.
       </p>
       <div class="page-meta">
         <div class="meta-item">
@@ -118,7 +118,7 @@
   <!-- ========== Project Banner ========== -->
   <div class="container" style="margin-bottom: 2.5rem; position: relative; z-index: 5;">
     <div class="project-detail-banner">
-      <img src="assets/whatsapp-bot.png" alt="WhatsApp Gemini Bot Showcase">
+      <img src="assets/whatsapp-bot.png" alt="WhatsApp Groq Bot Showcase">
     </div>
   </div>
 
@@ -134,13 +134,10 @@
           <div class="doc-section reveal">
             <h2 id="overview">Overview</h2>
             <p>
-              The WhatsApp Gemini Bot is an intelligent chatbot designed to provide seamless, conversational interactions directly within WhatsApp. Powered by Google's advanced Gemini 2.0 Flash AI, it goes beyond simple rule-based bots by offering full natural language understanding.
+              The WhatsApp Groq Bot is a highly capable auto-responder that acts as a personal assistant directly within WhatsApp. Powered by Groq AI (Llama 3.3), it perfectly mimics my casual texting style to handle conversations on my behalf without revealing it is an AI.
             </p>
             <p>
-              A key feature of the bot is its multilingual capability. It automatically detects the language of incoming messages and replies in the exact same language, making it accessible to a global audience without requiring any explicit language settings. Additionally, it maintains a conversational memory within a 1-hour window, allowing for natural, flowing interactions rather than isolated question-answer pairs.
-            </p>
-            <p>
-              Built entirely on free-tier services (Gemini API and WhatsApp Business API), it demonstrates how powerful AI solutions can be deployed cost-effectively for personal use or small business testing.
+              A major standout feature is its dynamic state-management. It uses MongoDB for robust session persistence, ensuring that conversational context is maintained securely across ephemeral server restarts. Additionally, the bot is fully multilingual, intelligently detecting and responding in the language of the incoming message.
             </p>
           </div>
 
@@ -149,31 +146,24 @@
             <h2 id="features">Key Features</h2>
             <div class="feature-list">
               <div class="feature-item">
-                <span class="feature-icon">🌍</span>
+                <span class="feature-icon">💬</span>
                 <div class="feature-text">
-                  <h4>Multilingual</h4>
-                  <p>Automatically detects the language of any incoming text and intelligently replies in the same language.</p>
+                  <h4>Perfect Impersonation</h4>
+                  <p>A highly tuned Groq AI system prompt designed to perfectly mimic my casual texting style without revealing it is an AI.</p>
                 </div>
               </div>
               <div class="feature-item">
                 <span class="feature-icon">🧠</span>
                 <div class="feature-text">
-                  <h4>Conversational Memory</h4>
-                  <p>Remembers the context of the conversation within a 1-hour window, enabling multi-turn dialogue.</p>
+                  <h4>Dynamic Session Persistence</h4>
+                  <p>Dynamic state-management using MongoDB for robust session persistence, allowing it to remember past context securely.</p>
                 </div>
               </div>
               <div class="feature-item">
-                <span class="feature-icon">💬</span>
+                <span class="feature-icon">🌍</span>
                 <div class="feature-text">
-                  <h4>Natural Tone</h4>
-                  <p>Tuned to provide short, friendly, and honest WhatsApp-style replies, never pretending to be human.</p>
-                </div>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">💸</span>
-                <div class="feature-text">
-                  <h4>Free Tier Architecture</h4>
-                  <p>Architected to run entirely on the free tiers of Google AI Studio (Gemini 2.0 Flash) and Meta's WhatsApp Business API.</p>
+                  <h4>Multilingual</h4>
+                  <p>Automatically detects the language of any incoming text and intelligently replies in the same language.</p>
                 </div>
               </div>
             </div>
@@ -183,7 +173,7 @@
           <div class="doc-section reveal">
             <h2 id="architecture">Technical Architecture</h2>
             <p>
-              The bot is built using a lightweight Node.js Express server that handles incoming webhooks from the WhatsApp Cloud API. When a message is received, it extracts the text and sender ID, appending it to the user's specific conversational history. This history is then passed to the Google Gemini API to generate context-aware responses.
+              The core of the bot runs on Node.js utilizing the <code>@whiskeysockets/baileys</code> library to interface with WhatsApp. MongoDB handles the state-management and session keys, while the Groq API (Llama 3.3) provides the lightning-fast intelligence.
             </p>
             <pre><code>whatsapp-bot/
 ├── src/
@@ -207,9 +197,9 @@
             <h4>Tech Stack</h4>
             <div class="tech-list">
               <span>Node.js</span>
-              <span>Express</span>
-              <span>Gemini API</span>
-              <span>WhatsApp API</span>
+              <span>Baileys</span>
+              <span>Groq API (Llama 3.3)</span>
+              <span>MongoDB</span>
             </div>
           </div>
 

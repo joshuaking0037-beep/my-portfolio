@@ -1,0 +1,5 @@
+Summary: A multilingual WhatsApp auto-responder bot that seamlessly impersonates the user using Groq AI. It dynamically maintains conversational memory to act as a highly intelligent personal assistant.
+
+Tech Stack: Node.js, @whiskeysockets/baileys, Groq API (Llama 3.3), MongoDB.
+
+Standout Feature: The dynamic state-management using MongoDB for session persistence, combined with a highly tuned Groq AI system prompt designed to perfectly mimic the user's casual texting style without revealing it is an AI.
